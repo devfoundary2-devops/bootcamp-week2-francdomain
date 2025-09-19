@@ -19,6 +19,9 @@ COPY --chown=nodejs:nodejs package.json package-lock.json ./
 RUN npm ci
 COPY --chown=nodejs:nodejs . .
 EXPOSE 3000
+COPY --chown=nodejs:nodejs dev-entrypoint.sh /usr/local/bin/dev-entrypoint.sh
+RUN chmod +x /usr/local/bin/dev-entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/dev-entrypoint.sh"]
 CMD ["npm", "start"]
 
 # Build stage

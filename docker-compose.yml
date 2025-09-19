@@ -81,6 +81,7 @@ services:
     container_name: shopmicro-frontend
     environment:
       - REACT_APP_API_URL=http://localhost:3001
+      - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
       - GENERATE_SOURCEMAP=false
     ports:
