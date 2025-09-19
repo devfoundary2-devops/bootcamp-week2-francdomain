@@ -1,5 +1,5 @@
 # Multi-stage build for optimized production image
-FROM node:18-alpine AS base
+FROM node:20-alpine3.22 AS base
 
 # Install security updates and common tools
 RUN apk update && apk upgrade && \
@@ -18,7 +18,15 @@ USER nodejs
 COPY --chown=nodejs:nodejs package*.json ./
 RUN npm ci
 COPY --chown=nodejs:nodejs . .
+
+# Use an entrypoint that installs devDependencies when node_modules is missing
+# This avoids relying on a globally installed nodemon and broken symlinks when
+# the host mounts an empty volume over /usr/src/app or /usr/src/app/node_modules.
+COPY --chown=nodejs:nodejs dev-entrypoint.sh /usr/local/bin/dev-entrypoint.sh
+RUN chmod +x /usr/local/bin/dev-entrypoint.sh
+
 EXPOSE 3001
+ENTRYPOINT ["/usr/local/bin/dev-entrypoint.sh"]
 CMD ["npm", "run", "dev"]
 
 # Build stage for production
