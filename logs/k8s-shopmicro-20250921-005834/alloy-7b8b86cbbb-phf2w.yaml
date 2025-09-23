@@ -1,0 +1,150 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-09-20T22:37:31Z"
+  generateName: alloy-7b8b86cbbb-
+  generation: 1
+  labels:
+    app: alloy
+    pod-template-hash: 7b8b86cbbb
+  name: alloy-7b8b86cbbb-phf2w
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: alloy-7b8b86cbbb
+    uid: c6a5d294-dacd-479a-bfe3-19709a0bfb39
+  resourceVersion: "4982"
+  uid: 6429a46b-c088-4791-8ced-44f520b50197
+spec:
+  containers:
+  - args:
+    - --config=/etc/alloy/config.alloy
+    image: otel/opentelemetry-collector-contrib:latest
+    imagePullPolicy: Always
+    name: alloy
+    ports:
+    - containerPort: 4318
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/alloy
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-jlswc
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: alloy-config
+    name: config
+  - name: kube-api-access-jlswc
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:59Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:31Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:54:36Z"
+    message: 'containers with unready status: [alloy]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:54:36Z"
+    message: 'containers with unready status: [alloy]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:31Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://651e62825c969341f4144b0192aa0255a5b6f98b526ce27c68380407ff0d076b
+    image: otel/opentelemetry-collector-contrib:latest
+    imageID: docker-pullable://otel/opentelemetry-collector-contrib@sha256:89107a3a8f4636a396927edf7025bb9614b8da2d92f4cc3f43109e8d115736e2
+    lastState:
+      terminated:
+        containerID: docker://651e62825c969341f4144b0192aa0255a5b6f98b526ce27c68380407ff0d076b
+        exitCode: 1
+        finishedAt: "2025-09-20T23:54:35Z"
+        reason: Error
+        startedAt: "2025-09-20T23:54:35Z"
+    name: alloy
+    ready: false
+    resources: {}
+    restartCount: 15
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=alloy pod=alloy-7b8b86cbbb-phf2w_shopmicro(6429a46b-c088-4791-8ced-44f520b50197)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /etc/alloy
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-jlswc
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.4
+  hostIPs:
+  - ip: 192.168.105.4
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.10
+  podIPs:
+  - ip: 10.244.0.10
+  qosClass: BestEffort
+  startTime: "2025-09-20T22:37:31Z"

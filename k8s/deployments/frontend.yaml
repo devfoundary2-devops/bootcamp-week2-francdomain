@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: shopmicro
+  labels:
+    app: frontend
+    tier: application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: application
+    spec:
+      containers:
+      - name: frontend
+        image: shopmicro-frontend:latest
+        imagePullPolicy: Never
+        env:
+        - name: REACT_APP_BACKEND_URL
+          value: "http://backend:3001"
+        - name: OTEL_SERVICE_NAME
+          value: "shopmicro-frontend"
+        ports:
+        - containerPort: 3000
+          name: http
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+

@@ -1,0 +1,73 @@
+Name:             alloy-7b8b86cbbb-phf2w
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.4
+Start Time:       Sat, 20 Sep 2025 23:37:31 +0100
+Labels:           app=alloy
+                  pod-template-hash=7b8b86cbbb
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.10
+IPs:
+  IP:           10.244.0.10
+Controlled By:  ReplicaSet/alloy-7b8b86cbbb
+Containers:
+  alloy:
+    Container ID:  docker://349f69b7e6692d50007955c0fb871f762d931c70110a453353f45542dfd83c91
+    Image:         otel/opentelemetry-collector-contrib:latest
+    Image ID:      docker-pullable://otel/opentelemetry-collector-contrib@sha256:89107a3a8f4636a396927edf7025bb9614b8da2d92f4cc3f43109e8d115736e2
+    Port:          4318/TCP
+    Host Port:     0/TCP
+    Args:
+      --config=/etc/alloy/config.alloy
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 00:38:54 +0100
+      Finished:     Sun, 21 Sep 2025 00:38:55 +0100
+    Ready:          False
+    Restart Count:  12
+    Environment:    <none>
+    Mounts:
+      /etc/alloy from config (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jlswc (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      alloy-config
+    Optional:  false
+  kube-api-access-jlswc:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  64m                    default-scheduler  Successfully assigned shopmicro/alloy-7b8b86cbbb-phf2w to minikube
+  Normal   Pulled     64m                    kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 13.389s (27.314s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     63m                    kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.248s (22.614s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     62m                    kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.172s (50.671s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     62m                    kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.313s (2.313s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     61m                    kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.779s (2.779s including waiting). Image size: 328025235 bytes.
+  Normal   Created    60m (x6 over 64m)      kubelet            Created container: alloy
+  Normal   Started    60m (x6 over 64m)      kubelet            Started container alloy
+  Normal   Pulled     60m                    kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 3.762s (3.762s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     57m                    kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 3.023s (3.023s including waiting). Image size: 328025235 bytes.
+  Warning  BackOff    4m29s (x133 over 63m)  kubelet            Back-off restarting failed container alloy in pod alloy-7b8b86cbbb-phf2w_shopmicro(6429a46b-c088-4791-8ced-44f520b50197)
+  Normal   Pulling    3m21s (x13 over 64m)   kubelet            Pulling image "otel/opentelemetry-collector-contrib:latest"

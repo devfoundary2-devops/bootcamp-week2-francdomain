@@ -1,0 +1,70 @@
+Name:             ml-service-5d8949c74c-2j86d
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.4
+Start Time:       Sat, 20 Sep 2025 23:38:01 +0100
+Labels:           app=ml-service
+                  pod-template-hash=5d8949c74c
+                  tier=application
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.15
+IPs:
+  IP:           10.244.0.15
+Controlled By:  ReplicaSet/ml-service-5d8949c74c
+Containers:
+  ml-service:
+    Container ID:   docker://27eed0538b7c5b7b149171b753a243c040ba3b62868618bc0a66403e8ca73a71
+    Image:          shopmicro-ml-service:latest
+    Image ID:       docker://sha256:0e1d8e884e7b4d75bd70d62a19d9616d4cdfa980b25730ba99410e6ecd5520b8
+    Port:           3002/TCP (http)
+    Host Port:      0/TCP (http)
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 00:38:39 +0100
+      Finished:     Sun, 21 Sep 2025 00:38:39 +0100
+    Ready:          False
+    Restart Count:  12
+    Limits:
+      cpu:     400m
+      memory:  512Mi
+    Requests:
+      cpu:      200m
+      memory:   256Mi
+    Liveness:   http-get http://:3002/health/live delay=20s timeout=1s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:3002/health/ready delay=5s timeout=1s period=5s #success=1 #failure=3
+    Environment:
+      PORT:       3002
+      REDIS_URL:  redis://redis:6379
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-46mrx (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-46mrx:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  64m                    default-scheduler  Successfully assigned shopmicro/ml-service-5d8949c74c-2j86d to minikube
+  Normal   Created    24m (x9 over 64m)      kubelet            Created container: ml-service
+  Normal   Started    24m (x9 over 64m)      kubelet            Started container ml-service
+  Warning  BackOff    4m53s (x155 over 64m)  kubelet            Back-off restarting failed container ml-service in pod ml-service-5d8949c74c-2j86d_shopmicro(56168f3e-8d4b-4dda-8f99-23e088a1ad64)
+  Normal   Pulled     3m34s (x13 over 64m)   kubelet            Container image "shopmicro-ml-service:latest" already present on machine

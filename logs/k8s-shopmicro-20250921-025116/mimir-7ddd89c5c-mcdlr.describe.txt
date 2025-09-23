@@ -1,0 +1,80 @@
+Name:             mimir-7ddd89c5c-mcdlr
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.5
+Start Time:       Sun, 21 Sep 2025 02:12:32 +0100
+Labels:           app=mimir
+                  pod-template-hash=7ddd89c5c
+Annotations:      kubectl.kubernetes.io/restartedAt: 2025-09-21T02:26:16+01:00
+Status:           Running
+IP:               10.244.0.26
+IPs:
+  IP:           10.244.0.26
+Controlled By:  ReplicaSet/mimir-7ddd89c5c
+Containers:
+  mimir:
+    Container ID:  docker://51b2774e5458184317cd0880df8ae97b43f8f9dac0fd9376c41c9d49a4e84e24
+    Image:         grafana/mimir:latest
+    Image ID:      docker-pullable://grafana/mimir@sha256:f97a1a6885a0c8ee80bc8f14343183dd67e9786cfbc18198d9a4138354fda55e
+    Port:          9009/TCP
+    Host Port:     0/TCP
+    Args:
+      --config.file=/etc/mimir/mimir.yaml
+      --target=all
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 02:46:37 +0100
+      Finished:     Sun, 21 Sep 2025 02:46:37 +0100
+    Ready:          False
+    Restart Count:  9
+    Environment:    <none>
+    Mounts:
+      /data from data (rw)
+      /etc/mimir from config (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-rmvqn (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      mimir-config
+    Optional:  false
+  data:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  kube-api-access-rmvqn:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                   From               Message
+  ----     ------     ----                  ----               -------
+  Normal   Scheduled  38m                   default-scheduler  Successfully assigned shopmicro/mimir-7ddd89c5c-mcdlr to minikube
+  Normal   Pulled     38m                   kubelet            Successfully pulled image "grafana/mimir:latest" in 2.095s (2.095s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     38m                   kubelet            Successfully pulled image "grafana/mimir:latest" in 2.298s (2.299s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     38m                   kubelet            Successfully pulled image "grafana/mimir:latest" in 2.134s (2.208s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     37m                   kubelet            Successfully pulled image "grafana/mimir:latest" in 2.344s (2.344s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     36m                   kubelet            Successfully pulled image "grafana/mimir:latest" in 2.313s (2.83s including waiting). Image size: 95927062 bytes.
+  Normal   Created    35m (x6 over 38m)     kubelet            Created container: mimir
+  Normal   Started    35m (x6 over 38m)     kubelet            Started container mimir
+  Normal   Pulled     35m                   kubelet            Successfully pulled image "grafana/mimir:latest" in 2.47s (2.47s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     32m                   kubelet            Successfully pulled image "grafana/mimir:latest" in 2.732s (2.732s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     9m57s                 kubelet            Successfully pulled image "grafana/mimir:latest" in 2.44s (2.44s including waiting). Image size: 95927062 bytes.
+  Normal   Pulling    4m46s (x10 over 38m)  kubelet            Pulling image "grafana/mimir:latest"
+  Warning  BackOff    4m40s (x94 over 38m)  kubelet            Back-off restarting failed container mimir in pod mimir-7ddd89c5c-mcdlr_shopmicro(6fd51ef1-3dd6-4061-9e7a-54c957a8c278)

@@ -1,0 +1,75 @@
+Name:             mimir-57ffbf8976-pfdn2
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.5
+Start Time:       Sun, 21 Sep 2025 03:03:16 +0100
+Labels:           app=mimir
+                  pod-template-hash=57ffbf8976
+Annotations:      kubectl.kubernetes.io/restartedAt: 2025-09-21T03:00:37+01:00
+Status:           Running
+IP:               10.244.0.35
+IPs:
+  IP:           10.244.0.35
+Controlled By:  ReplicaSet/mimir-57ffbf8976
+Containers:
+  mimir:
+    Container ID:  docker://290d87212ebac13653d04e70ba09c943d1585de389b3356f73d70a9ec3afa0a6
+    Image:         grafana/mimir:latest
+    Image ID:      docker-pullable://grafana/mimir@sha256:f97a1a6885a0c8ee80bc8f14343183dd67e9786cfbc18198d9a4138354fda55e
+    Port:          9009/TCP
+    Host Port:     0/TCP
+    Args:
+      --config.file=/etc/mimir/mimir.yaml
+      --target=all
+    State:          Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 03:05:14 +0100
+      Finished:     Sun, 21 Sep 2025 03:05:14 +0100
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 03:04:23 +0100
+      Finished:     Sun, 21 Sep 2025 03:04:23 +0100
+    Ready:          False
+    Restart Count:  4
+    Environment:    <none>
+    Mounts:
+      /data from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-vkrbb (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  data:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  kube-api-access-vkrbb:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  2m4s               default-scheduler  Successfully assigned shopmicro/mimir-57ffbf8976-pfdn2 to minikube
+  Normal   Pulled     115s               kubelet            Successfully pulled image "grafana/mimir:latest" in 2.47s (8.105s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     109s               kubelet            Successfully pulled image "grafana/mimir:latest" in 2.075s (6.312s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     88s                kubelet            Successfully pulled image "grafana/mimir:latest" in 2.125s (7.315s including waiting). Image size: 95927062 bytes.
+  Normal   Pulled     57s                kubelet            Successfully pulled image "grafana/mimir:latest" in 2.377s (2.377s including waiting). Image size: 95927062 bytes.
+  Normal   Pulling    9s (x5 over 2m3s)  kubelet            Pulling image "grafana/mimir:latest"
+  Normal   Created    6s (x5 over 115s)  kubelet            Created container: mimir
+  Normal   Started    6s (x5 over 115s)  kubelet            Started container mimir
+  Warning  BackOff    6s (x9 over 108s)  kubelet            Back-off restarting failed container mimir in pod mimir-57ffbf8976-pfdn2_shopmicro(38f71a30-aedd-4204-8ea4-627e3280013c)
+  Normal   Pulled     6s                 kubelet            Successfully pulled image "grafana/mimir:latest" in 2.326s (2.326s including waiting). Image size: 95927062 bytes.

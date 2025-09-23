@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tempo
+  namespace: shopmicro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tempo
+  template:
+    metadata:
+      labels:
+        app: tempo
+    spec:
+      containers:
+      - name: tempo
+        image: grafana/tempo:latest
+        args: ["--config.file=/etc/tempo/tempo.yaml"]
+        ports:
+        - containerPort: 3200
+        - containerPort: 14250
+        volumeMounts:
+        # - name: data
+        #   mountPath: /data
+        - name: tempo-config
+          mountPath: /etc/tempo
+      volumes:
+      # - name: data
+      #   emptyDir: {}
+      - name: tempo-config
+        configMap:
+          name: tempo-config

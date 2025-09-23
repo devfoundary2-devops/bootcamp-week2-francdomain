@@ -1,0 +1,151 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-09-21T03:03:42+01:00"
+  creationTimestamp: "2025-09-21T02:03:43Z"
+  generateName: mimir-77c5b9d767-
+  generation: 1
+  labels:
+    app: mimir
+    pod-template-hash: 77c5b9d767
+  name: mimir-77c5b9d767-64ts2
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: mimir-77c5b9d767
+    uid: 1c790098-de9a-46be-908e-7008f63a8339
+  resourceVersion: "9201"
+  uid: 9686e722-4042-42d2-bef3-e0d042a79dd9
+spec:
+  containers:
+  - args:
+    - --config.file=/etc/mimir/mimir.yaml
+    - --target=all
+    image: grafana/mimir:latest
+    imagePullPolicy: Always
+    name: mimir
+    ports:
+    - containerPort: 9009
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hqklg
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - emptyDir: {}
+    name: data
+  - name: kube-api-access-hqklg
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:50Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:43Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:43Z"
+    message: 'containers with unready status: [mimir]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:43Z"
+    message: 'containers with unready status: [mimir]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:43Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://976bf41ffbfea5b0c5e39700acf698a6def413b45b4d12f2af37359b02064622
+    image: grafana/mimir:latest
+    imageID: docker-pullable://grafana/mimir@sha256:f97a1a6885a0c8ee80bc8f14343183dd67e9786cfbc18198d9a4138354fda55e
+    lastState:
+      terminated:
+        containerID: docker://976bf41ffbfea5b0c5e39700acf698a6def413b45b4d12f2af37359b02064622
+        exitCode: 1
+        finishedAt: "2025-09-21T02:04:47Z"
+        reason: Error
+        startedAt: "2025-09-21T02:04:47Z"
+    name: mimir
+    ready: false
+    resources: {}
+    restartCount: 3
+    started: false
+    state:
+      waiting:
+        message: back-off 40s restarting failed container=mimir pod=mimir-77c5b9d767-64ts2_shopmicro(9686e722-4042-42d2-bef3-e0d042a79dd9)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /data
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hqklg
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.5
+  hostIPs:
+  - ip: 192.168.105.5
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.39
+  podIPs:
+  - ip: 10.244.0.39
+  qosClass: BestEffort
+  startTime: "2025-09-21T02:03:43Z"

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alloy
+  namespace: shopmicro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alloy
+  template:
+    metadata:
+      labels:
+        app: alloy
+    spec:
+      containers:
+      - name: alloy
+        image: otel/opentelemetry-collector-contrib:latest
+        command: ["/otelcol-contrib"]
+        args: ["--config=/etc/alloy/config.alloy"]
+        ports:
+        - containerPort: 4317
+        - containerPort: 4318   # OTLP HTTP
+        - containerPort: 8889   # prometheus exporter (custom)
+        volumeMounts:
+        - name: alloy-config
+          mountPath: /etc/alloy
+      volumes:
+      - name: alloy-config
+        configMap:
+          name: alloy-config
+

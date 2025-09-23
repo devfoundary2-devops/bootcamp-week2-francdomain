@@ -1,0 +1,25 @@
+init compactor: mkdir /var/loki: permission denied
+error initialising module: compactor
+github.com/grafana/dskit/modules.(*Manager).initModule
+	/src/loki/vendor/github.com/grafana/dskit/modules/modules.go:138
+github.com/grafana/dskit/modules.(*Manager).InitModuleServices
+	/src/loki/vendor/github.com/grafana/dskit/modules/modules.go:108
+github.com/grafana/loki/v3/pkg/loki.(*Loki).Run
+	/src/loki/pkg/loki/loki.go:531
+main.main
+	/src/loki/cmd/loki/main.go:129
+runtime.main
+	/usr/local/go/src/runtime/proc.go:283
+runtime.goexit
+	/usr/local/go/src/runtime/asm_arm64.s:1223
+level=info ts=2025-09-21T01:46:44.130653655Z caller=main.go:126 msg="Starting Loki" version="(version=3.5.5, branch=release-3.5.x, revision=5aa8bd27)"
+level=info ts=2025-09-21T01:46:44.13067528Z caller=main.go:127 msg="Loading configuration file" filename=/etc/loki/loki.yaml
+level=info ts=2025-09-21T01:46:44.132521989Z caller=server.go:368 msg="server listening on addresses" http=[::]:3100 grpc=[::]:9095
+level=info ts=2025-09-21T01:46:44.133861781Z caller=table_manager.go:300 index-store=tsdb-2020-10-24 msg="query readiness setup completed" duration=750ns distinct_users_len=0 distinct_users=
+level=info ts=2025-09-21T01:46:44.133877115Z caller=shipper.go:165 index-store=tsdb-2020-10-24 msg="starting index shipper in RW mode"
+level=info ts=2025-09-21T01:46:44.133915031Z caller=table_manager.go:136 index-store=tsdb-2020-10-24 msg="uploading tables"
+level=info ts=2025-09-21T01:46:44.133977031Z caller=head_manager.go:311 index-store=tsdb-2020-10-24 component=tsdb-head-manager msg="loaded wals by period" groups=0
+level=info ts=2025-09-21T01:46:44.133993073Z caller=manager.go:86 index-store=tsdb-2020-10-24 component=tsdb-manager msg="loaded leftover local indices" err=null successful=true buckets=0 indices=0 failures=0
+level=info ts=2025-09-21T01:46:44.134002406Z caller=head_manager.go:311 index-store=tsdb-2020-10-24 component=tsdb-head-manager msg="loaded wals by period" groups=1
+level=info ts=2025-09-21T01:46:44.135145532Z caller=mapper.go:47 msg="cleaning up mapped rules directory" path=/rules
+level=error ts=2025-09-21T01:46:44.135746282Z caller=log.go:223 msg="error running loki" err="init compactor: mkdir /var/loki: permission denied\nerror initialising module: compactor\ngithub.com/grafana/dskit/modules.(*Manager).initModule\n\t/src/loki/vendor/github.com/grafana/dskit/modules/modules.go:138\ngithub.com/grafana/dskit/modules.(*Manager).InitModuleServices\n\t/src/loki/vendor/github.com/grafana/dskit/modules/modules.go:108\ngithub.com/grafana/loki/v3/pkg/loki.(*Loki).Run\n\t/src/loki/pkg/loki/loki.go:531\nmain.main\n\t/src/loki/cmd/loki/main.go:129\nruntime.main\n\t/usr/local/go/src/runtime/proc.go:283\nruntime.goexit\n\t/usr/local/go/src/runtime/asm_arm64.s:1223"

@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mimir-config
+  namespace: shopmicro
+data:
+  mimir.yaml: |
+    target: all
+    server:
+      http_listen_port: 9009
+    common:
+      storage:
+        backend: filesystem
+        filesystem:
+          dir: /data
+    blocks_storage:
+      filesystem:
+        dir: /data/blocks
+    compactor:
+      data_dir: /data/compactor
+    distributor:
+      ring:
+        kvstore:
+          store: memberlist
+    ingester:
+      ring:
+        kvstore:
+          store: memberlist
+    ruler_storage:
+      filesystem:
+        dir: /data/ruler
+    store_gateway:
+      sharding_ring:
+        kvstore:
+          store: memberlist

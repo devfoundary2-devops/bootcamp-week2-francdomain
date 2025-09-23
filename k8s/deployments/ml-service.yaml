@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-service
+  namespace: shopmicro
+  labels:
+    app: ml-service
+    tier: application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-service
+  template:
+    metadata:
+      labels:
+        app: ml-service
+        tier: application
+    spec:
+      containers:
+      - name: ml-service
+        image: shopmicro-ml-service:latest
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 3002
+        env:
+        - name: PORT
+          value: "3002"
+        - name: REDIS_URL
+          value: "redis://redis:6379"
+        - name: BACKEND_URL
+          value: "http://backend:3001"
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 3002
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 3002
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "500Mi"
+            cpu: "512m"
+

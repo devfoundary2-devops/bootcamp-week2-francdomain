@@ -1,0 +1,6 @@
+failed parsing config: failed to parse configFile /etc/tempo/tempo.yaml: yaml: unmarshal errors:
+  line 2: field receivers not found in type app.Config
+  line 8: field processors not found in type app.Config
+  line 10: field exporters not found in type app.Config
+  line 16: field service not found in type app.Config
+  line 22: field ingesters not found in type app.Config

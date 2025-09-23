@@ -1,0 +1,72 @@
+Name:             alloy-78b5754cd9-glghg
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.5
+Start Time:       Sun, 21 Sep 2025 03:00:38 +0100
+Labels:           app=alloy
+                  pod-template-hash=78b5754cd9
+Annotations:      kubectl.kubernetes.io/restartedAt: 2025-09-21T03:00:37+01:00
+Status:           Running
+IP:               10.244.0.30
+IPs:
+  IP:           10.244.0.30
+Controlled By:  ReplicaSet/alloy-78b5754cd9
+Containers:
+  alloy:
+    Container ID:  docker://d2a5a280b051badac6f617eb5631acf015dcffc57e26db436ccc6287f4d93a5e
+    Image:         otel/opentelemetry-collector-contrib:latest
+    Image ID:      docker-pullable://otel/opentelemetry-collector-contrib@sha256:89107a3a8f4636a396927edf7025bb9614b8da2d92f4cc3f43109e8d115736e2
+    Port:          4318/TCP
+    Host Port:     0/TCP
+    Args:
+      --config=/etc/alloy/config.alloy
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 03:04:04 +0100
+      Finished:     Sun, 21 Sep 2025 03:04:04 +0100
+    Ready:          False
+    Restart Count:  5
+    Environment:    <none>
+    Mounts:
+      /etc/alloy from config (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-rffss (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      alloy-config
+    Optional:  false
+  kube-api-access-rffss:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  4m42s                default-scheduler  Successfully assigned shopmicro/alloy-78b5754cd9-glghg to minikube
+  Normal   Pulled     4m37s                kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.118s (5.458s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     4m28s                kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.146s (7.549s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     4m11s                kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.173s (3.54s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     3m39s                kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.218s (3.682s including waiting). Image size: 328025235 bytes.
+  Normal   Pulled     2m43s                kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.168s (4.687s including waiting). Image size: 328025235 bytes.
+  Normal   Pulling    79s (x6 over 4m42s)  kubelet            Pulling image "otel/opentelemetry-collector-contrib:latest"
+  Normal   Pulled     77s                  kubelet            Successfully pulled image "otel/opentelemetry-collector-contrib:latest" in 2.236s (2.236s including waiting). Image size: 328025235 bytes.
+  Normal   Created    76s (x6 over 4m37s)  kubelet            Created container: alloy
+  Normal   Started    76s (x6 over 4m36s)  kubelet            Started container alloy
+  Warning  BackOff    3s (x22 over 4m28s)  kubelet            Back-off restarting failed container alloy in pod alloy-78b5754cd9-glghg_shopmicro(5e5e102a-1690-4bf8-8a02-01a039752aed)

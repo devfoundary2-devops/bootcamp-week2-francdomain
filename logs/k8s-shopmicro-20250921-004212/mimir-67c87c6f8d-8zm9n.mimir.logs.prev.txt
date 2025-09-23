@@ -1,0 +1,5 @@
+error loading config from /etc/mimir/mimir.yaml: Error parsing config file: yaml: unmarshal errors:
+  line 3: field apiVersion not found in type server.Config
+  line 4: field kind not found in type server.Config
+  line 5: field metadata not found in type server.Config
+  line 8: field data not found in type server.Config

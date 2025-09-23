@@ -1,0 +1,67 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: prometheus-config
+#   namespace: shopmicro
+# data:
+#   prometheus.yml: |
+#     global:
+#       scrape_interval: 30s
+#       evaluation_interval: 30s
+#       scrape_timeout: 25s
+
+#     scrape_configs:
+#       - job_name: 'shopmicro-services'
+#         static_configs:
+#           # - targets: ['frontend.shopmicro.svc.cluster.local:3000']
+#           #   labels:
+#           #     service: frontend
+#           #     environment: shopmicro
+#           - targets: ['backend.shopmicro.svc.cluster.local:3001']
+#             labels:
+#               service: backend
+#               environment: shopmicro
+#           # - targets: ['ml-service.shopmicro.svc.cluster.local:3002']
+#           #   labels:
+#           #     service: ml-service
+#           #     environment: shopmicro
+
+#       - job_name: 'prometheus'
+#         static_configs:
+#           - targets: ['localhost:9090']
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: shopmicro
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+    scrape_configs:
+      - job_name: 'kubernetes-pods'
+        metrics_path: /metrics
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_namespace]
+            action: keep
+            regex: shopmicro
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+            action: replace
+            target_label: __address__
+            regex: (.+)
+            replacement: $1
+      - job_name: 'backend'
+        static_configs:
+          - targets: ['backend:3001']

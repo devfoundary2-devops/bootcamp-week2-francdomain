@@ -1,0 +1,36 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mimir
+  namespace: shopmicro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mimir
+  template:
+    metadata:
+      labels:
+        app: mimir
+    spec:
+      containers:
+      - name: mimir
+        image: grafana/mimir:latest
+        args:
+        - -config.file=/etc/mimir/mimir.yaml
+        - -target=all
+        ports:
+        - containerPort: 9009
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: mimir-config  # Added this volume mount
+          mountPath: /etc/mimir
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: mimir-config
+        configMap:
+          name: mimir-config
+

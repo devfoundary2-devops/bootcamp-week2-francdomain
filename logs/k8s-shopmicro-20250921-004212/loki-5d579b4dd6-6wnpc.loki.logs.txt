@@ -1,0 +1,5 @@
+failed parsing config: /etc/loki/loki.yaml: yaml: unmarshal errors:
+  line 7: field apiVersion not found in type common.FilesystemConfig
+  line 8: field kind not found in type common.FilesystemConfig
+  line 9: field metadata not found in type common.FilesystemConfig
+  line 12: field data not found in type common.FilesystemConfig. Use `-config.expand-env=true` flag if you want to expand environment variables in your config file

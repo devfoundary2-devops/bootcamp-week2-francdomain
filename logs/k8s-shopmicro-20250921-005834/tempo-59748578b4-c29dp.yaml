@@ -1,0 +1,154 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-09-21T00:49:12+01:00"
+  creationTimestamp: "2025-09-20T23:49:12Z"
+  generateName: tempo-59748578b4-
+  generation: 1
+  labels:
+    app: tempo
+    pod-template-hash: 59748578b4
+  name: tempo-59748578b4-c29dp
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: tempo-59748578b4
+    uid: 8f2f4a1c-4998-4ccd-838a-7895e5937ce3
+  resourceVersion: "5073"
+  uid: 71915847-38f9-4320-8218-97cac68e9cbe
+spec:
+  containers:
+  - args:
+    - --config.file=/etc/tempo/tempo.yaml
+    image: grafana/tempo:latest
+    imagePullPolicy: Always
+    name: tempo
+    ports:
+    - containerPort: 3200
+      protocol: TCP
+    - containerPort: 4318
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/tempo
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-pxch5
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: tempo-config
+    name: config
+  - name: kube-api-access-pxch5
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:22Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:12Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:12Z"
+    message: 'containers with unready status: [tempo]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:12Z"
+    message: 'containers with unready status: [tempo]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:12Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://588557dc9f5f3d357c82e642165f158a8957703c6ce2e1656477fc8b095fe3a0
+    image: grafana/tempo:latest
+    imageID: docker-pullable://grafana/tempo@sha256:81498b4ab92df2c1bdba63935a0d697b3d2413b5bea84d97c25578abd0259627
+    lastState:
+      terminated:
+        containerID: docker://588557dc9f5f3d357c82e642165f158a8957703c6ce2e1656477fc8b095fe3a0
+        exitCode: 1
+        finishedAt: "2025-09-20T23:55:25Z"
+        reason: Error
+        startedAt: "2025-09-20T23:55:25Z"
+    name: tempo
+    ready: false
+    resources: {}
+    restartCount: 6
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=tempo pod=tempo-59748578b4-c29dp_shopmicro(71915847-38f9-4320-8218-97cac68e9cbe)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /etc/tempo
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-pxch5
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.4
+  hostIPs:
+  - ip: 192.168.105.4
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.22
+  podIPs:
+  - ip: 10.244.0.22
+  qosClass: BestEffort
+  startTime: "2025-09-20T23:49:12Z"

@@ -1,0 +1,65 @@
+Name:             tempo-949b79885-bph97
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.5
+Start Time:       Sun, 21 Sep 2025 03:03:43 +0100
+Labels:           app=tempo
+                  pod-template-hash=949b79885
+Annotations:      kubectl.kubernetes.io/restartedAt: 2025-09-21T03:03:42+01:00
+Status:           Running
+IP:               10.244.0.38
+IPs:
+  IP:           10.244.0.38
+Controlled By:  ReplicaSet/tempo-949b79885
+Containers:
+  tempo:
+    Container ID:  docker://161cadd4faa96430e1790d12039fd130352c3625b1e1406cc0b0469d6ad6fb1f
+    Image:         grafana/tempo:latest
+    Image ID:      docker-pullable://grafana/tempo@sha256:81498b4ab92df2c1bdba63935a0d697b3d2413b5bea84d97c25578abd0259627
+    Ports:         3200/TCP, 4318/TCP
+    Host Ports:    0/TCP, 0/TCP
+    Args:
+      --config.file=/etc/tempo/tempo.yaml
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 03:04:52 +0100
+      Finished:     Sun, 21 Sep 2025 03:04:52 +0100
+    Ready:          False
+    Restart Count:  3
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jdk8k (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-jdk8k:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  98s                default-scheduler  Successfully assigned shopmicro/tempo-949b79885-bph97 to minikube
+  Normal   Pulled     94s                kubelet            Successfully pulled image "grafana/tempo:latest" in 2.038s (4.084s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     82s                kubelet            Successfully pulled image "grafana/tempo:latest" in 2.203s (11.251s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     62s                kubelet            Successfully pulled image "grafana/tempo:latest" in 2.103s (4.63s including waiting). Image size: 116659613 bytes.
+  Normal   Pulling    32s (x4 over 98s)  kubelet            Pulling image "grafana/tempo:latest"
+  Normal   Created    29s (x4 over 94s)  kubelet            Created container: tempo
+  Normal   Started    29s (x4 over 94s)  kubelet            Started container tempo
+  Normal   Pulled     29s                kubelet            Successfully pulled image "grafana/tempo:latest" in 2.359s (2.359s including waiting). Image size: 116659613 bytes.
+  Warning  BackOff    3s (x7 over 81s)   kubelet            Back-off restarting failed container tempo in pod tempo-949b79885-bph97_shopmicro(7cf4f73a-9ec0-4e36-9d06-82c8a2b28eb9)

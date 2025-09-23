@@ -1,0 +1,152 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-09-20T22:37:31Z"
+  generateName: tempo-67b5f99d74-
+  generation: 1
+  labels:
+    app: tempo
+    pod-template-hash: 67b5f99d74
+  name: tempo-67b5f99d74-t99c8
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: tempo-67b5f99d74
+    uid: 6298c50d-73a1-4680-a39b-4cf19674d4d2
+  resourceVersion: "4932"
+  uid: 0af948fe-5e12-4b7e-a242-3efeda6704b5
+spec:
+  containers:
+  - args:
+    - --config.file=/etc/tempo/tempo.yaml
+    image: grafana/tempo:latest
+    imagePullPolicy: Always
+    name: tempo
+    ports:
+    - containerPort: 3200
+      protocol: TCP
+    - containerPort: 4318
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/tempo
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-78g68
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: tempo-config
+    name: config
+  - name: kube-api-access-78g68
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:38:18Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:31Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:38:44Z"
+    message: 'containers with unready status: [tempo]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:38:44Z"
+    message: 'containers with unready status: [tempo]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:31Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://99412aa19778859a62f4def790878bfbc8873b5a1d8ccab9a3caa5484a9ae08f
+    image: grafana/tempo:latest
+    imageID: docker-pullable://grafana/tempo@sha256:81498b4ab92df2c1bdba63935a0d697b3d2413b5bea84d97c25578abd0259627
+    lastState:
+      terminated:
+        containerID: docker://99412aa19778859a62f4def790878bfbc8873b5a1d8ccab9a3caa5484a9ae08f
+        exitCode: 1
+        finishedAt: "2025-09-20T23:54:10Z"
+        reason: Error
+        startedAt: "2025-09-20T23:54:10Z"
+    name: tempo
+    ready: false
+    resources: {}
+    restartCount: 15
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=tempo pod=tempo-67b5f99d74-t99c8_shopmicro(0af948fe-5e12-4b7e-a242-3efeda6704b5)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /etc/tempo
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-78g68
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.4
+  hostIPs:
+  - ip: 192.168.105.4
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.12
+  podIPs:
+  - ip: 10.244.0.12
+  qosClass: BestEffort
+  startTime: "2025-09-20T22:37:31Z"

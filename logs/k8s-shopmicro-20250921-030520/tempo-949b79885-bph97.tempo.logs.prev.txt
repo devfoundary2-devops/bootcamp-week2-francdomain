@@ -1,0 +1,1 @@
+failed parsing config: failed to read configFile /etc/tempo/tempo.yaml: open /etc/tempo/tempo.yaml: no such file or directory

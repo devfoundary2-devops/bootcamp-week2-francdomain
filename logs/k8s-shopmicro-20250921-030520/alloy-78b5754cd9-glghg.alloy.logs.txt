@@ -1,0 +1,2 @@
+Error: invalid configuration: service::pipelines::metrics: references exporter "prometheus/mimir" which is not configured
+2025/09/21 02:04:04 collector server run finished with error: invalid configuration: service::pipelines::metrics: references exporter "prometheus/mimir" which is not configured

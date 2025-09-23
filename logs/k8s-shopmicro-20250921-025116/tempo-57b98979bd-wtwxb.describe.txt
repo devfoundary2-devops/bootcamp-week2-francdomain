@@ -1,0 +1,73 @@
+Name:             tempo-57b98979bd-wtwxb
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.5
+Start Time:       Sun, 21 Sep 2025 02:42:16 +0100
+Labels:           app=tempo
+                  pod-template-hash=57b98979bd
+Annotations:      kubectl.kubernetes.io/restartedAt: 2025-09-21T02:42:15+01:00
+Status:           Running
+IP:               10.244.0.28
+IPs:
+  IP:           10.244.0.28
+Controlled By:  ReplicaSet/tempo-57b98979bd
+Containers:
+  tempo:
+    Container ID:  docker://a68c1dc87064166f83f3ec458ba1be9f5e1ec4cd9c7ab0960fb0be67a83c44c7
+    Image:         grafana/tempo:latest
+    Image ID:      docker-pullable://grafana/tempo@sha256:81498b4ab92df2c1bdba63935a0d697b3d2413b5bea84d97c25578abd0259627
+    Ports:         3200/TCP, 4318/TCP
+    Host Ports:    0/TCP, 0/TCP
+    Args:
+      --config.file=/etc/tempo/tempo.yaml
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 02:48:07 +0100
+      Finished:     Sun, 21 Sep 2025 02:48:07 +0100
+    Ready:          False
+    Restart Count:  6
+    Environment:    <none>
+    Mounts:
+      /etc/tempo from config (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-w974d (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      tempo-config
+    Optional:  false
+  kube-api-access-w974d:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                     From               Message
+  ----     ------     ----                    ----               -------
+  Normal   Scheduled  9m1s                    default-scheduler  Successfully assigned shopmicro/tempo-57b98979bd-wtwxb to minikube
+  Normal   Pulled     8m58s                   kubelet            Successfully pulled image "grafana/tempo:latest" in 3.386s (3.386s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     8m55s                   kubelet            Successfully pulled image "grafana/tempo:latest" in 2.244s (2.244s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     8m39s                   kubelet            Successfully pulled image "grafana/tempo:latest" in 3.512s (3.512s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     8m11s                   kubelet            Successfully pulled image "grafana/tempo:latest" in 2.737s (2.737s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     7m27s                   kubelet            Successfully pulled image "grafana/tempo:latest" in 2.855s (2.855s including waiting). Image size: 116659613 bytes.
+  Normal   Created    5m54s (x6 over 8m58s)   kubelet            Created container: tempo
+  Normal   Started    5m54s (x6 over 8m58s)   kubelet            Started container tempo
+  Normal   Pulled     5m54s                   kubelet            Successfully pulled image "grafana/tempo:latest" in 4.353s (4.353s including waiting). Image size: 116659613 bytes.
+  Warning  BackOff    3m40s (x26 over 8m54s)  kubelet            Back-off restarting failed container tempo in pod tempo-57b98979bd-wtwxb_shopmicro(dc8356a7-fcdc-4ea5-877f-be31550a9712)
+  Normal   Pulling    3m13s (x7 over 9m1s)    kubelet            Pulling image "grafana/tempo:latest"
+  Normal   Pulled     3m10s                   kubelet            Successfully pulled image "grafana/tempo:latest" in 2.382s (2.382s including waiting). Image size: 116659613 bytes.

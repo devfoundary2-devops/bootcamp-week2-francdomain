@@ -1,0 +1,3 @@
+error loading config from /etc/mimir/mimir.yaml: Error parsing config file: yaml: unmarshal errors:
+  line 5: field storage not found in type mimir.Config
+  line 11: field enable not found in type ruler.Config

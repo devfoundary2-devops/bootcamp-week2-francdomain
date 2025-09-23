@@ -1,0 +1,152 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-09-21T00:49:12+01:00"
+  creationTimestamp: "2025-09-20T23:49:12Z"
+  generateName: alloy-769986cc84-
+  generation: 1
+  labels:
+    app: alloy
+    pod-template-hash: 769986cc84
+  name: alloy-769986cc84-tcmds
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: alloy-769986cc84
+    uid: 8cd8a185-1cbf-4474-bb60-a2020000fbd3
+  resourceVersion: "5053"
+  uid: ef105a19-de39-4b2b-b8b1-632ec9ce8bba
+spec:
+  containers:
+  - args:
+    - --config=/etc/alloy/config.alloy
+    image: otel/opentelemetry-collector-contrib:latest
+    imagePullPolicy: Always
+    name: alloy
+    ports:
+    - containerPort: 4318
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/alloy
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-jrrx5
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: alloy-config
+    name: config
+  - name: kube-api-access-jrrx5
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:15Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:12Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:12Z"
+    message: 'containers with unready status: [alloy]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:12Z"
+    message: 'containers with unready status: [alloy]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T23:49:12Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://aefc7c4da97cf1f09a5d857f0769966d07d0b8d3b491f45b7fe682759a364b5f
+    image: otel/opentelemetry-collector-contrib:latest
+    imageID: docker-pullable://otel/opentelemetry-collector-contrib@sha256:89107a3a8f4636a396927edf7025bb9614b8da2d92f4cc3f43109e8d115736e2
+    lastState:
+      terminated:
+        containerID: docker://aefc7c4da97cf1f09a5d857f0769966d07d0b8d3b491f45b7fe682759a364b5f
+        exitCode: 1
+        finishedAt: "2025-09-20T23:55:11Z"
+        reason: Error
+        startedAt: "2025-09-20T23:55:11Z"
+    name: alloy
+    ready: false
+    resources: {}
+    restartCount: 6
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=alloy pod=alloy-769986cc84-tcmds_shopmicro(ef105a19-de39-4b2b-b8b1-632ec9ce8bba)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /etc/alloy
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-jrrx5
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.4
+  hostIPs:
+  - ip: 192.168.105.4
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.18
+  podIPs:
+  - ip: 10.244.0.18
+  qosClass: BestEffort
+  startTime: "2025-09-20T23:49:12Z"

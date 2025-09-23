@@ -1,17 +1,18 @@
 # Multi-stage build for Python ML service
-FROM python:3.11-slim AS base
+FROM python:3.12-slim AS base
 
 # Install system dependencies and security updates
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends \
-        build-essential \
-        curl \
-        && rm -rf /var/lib/apt/lists/*
+  apt-get install -y --no-install-recommends \
+  build-essential \
+  curl \
+  && rm -rf /var/lib/apt/lists/* && \
+  pip install --upgrade pip setuptools wheel
 
 # Create app directory and user
 WORKDIR /usr/src/app
 RUN useradd --create-home --shell /bin/bash app && \
-    chown -R app:app /usr/src/app
+  chown -R app:app /usr/src/app
 
 # Development stage
 FROM base AS development
@@ -34,13 +35,16 @@ USER app
 COPY --chown=app:app requirements.txt .
 RUN pip install --user --no-cache-dir -r requirements.txt gunicorn
 
-# Copy application code
-COPY --chown=app:app app.py .
-COPY --chown=app:app .env* ./
+# Copy full application code so production image has all modules (metrics, logging_config, telemetry, etc.)
+COPY --chown=app:app . .
+
+# Ensure the user's local pip binaries are on PATH
+ENV PATH=/home/app/.local/bin:$PATH
+ENV PYTHONPATH=/usr/src/app:${PYTHONPATH}
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:3002/health || exit 1
+  CMD curl -f http://localhost:3002/health || exit 1
 
 EXPOSE 3002
 

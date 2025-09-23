@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: shopmicro
+data:
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+      - name: Mimir
+        type: prometheus
+        access: proxy
+        url: http://mimir:9009/prometheus
+        isDefault: true
+        editable: true
+        jsonData:
+          timeInterval: 15s
+          queryTimeout: 300s
+          httpMethod: GET
+          prometheusType: Mimir
+          prometheusVersion: 2.40.0
+          cacheLevel: 'High'
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki:3100
+        editable: true
+        jsonData:
+          maxLines: 1000
+      - name: Tempo
+        type: tempo
+        access: proxy
+        url: http://tempo:3200
+        editable: true
+        jsonData:
+          httpMethod: GET
+          tracesToLogs:
+            datasourceUid: 'loki'
+            tags: ['job', 'instance']
+          tracesToMetrics:
+            datasourceUid: 'mimir'

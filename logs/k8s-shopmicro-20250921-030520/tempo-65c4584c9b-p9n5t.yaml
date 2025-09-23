@@ -1,0 +1,146 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-09-21T03:00:37+01:00"
+  creationTimestamp: "2025-09-21T02:03:16Z"
+  generateName: tempo-65c4584c9b-
+  generation: 1
+  labels:
+    app: tempo
+    pod-template-hash: 65c4584c9b
+  name: tempo-65c4584c9b-p9n5t
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: tempo-65c4584c9b
+    uid: b81b1d31-df4c-41de-8320-b94a77a3661f
+  resourceVersion: "9141"
+  uid: ddb1ced7-d5e9-4370-868a-1b887cf48a42
+spec:
+  containers:
+  - args:
+    - --config.file=/etc/tempo/tempo.yaml
+    image: grafana/tempo:latest
+    imagePullPolicy: Always
+    name: tempo
+    ports:
+    - containerPort: 3200
+      protocol: TCP
+    - containerPort: 4318
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-bxrxp
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-bxrxp
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:28Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:16Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:16Z"
+    message: 'containers with unready status: [tempo]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:16Z"
+    message: 'containers with unready status: [tempo]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:03:16Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://a27779a2d4dd0329218e4c50ad721fabf12a7781a40dbd593a0711738f4926fc
+    image: grafana/tempo:latest
+    imageID: docker-pullable://grafana/tempo@sha256:81498b4ab92df2c1bdba63935a0d697b3d2413b5bea84d97c25578abd0259627
+    lastState:
+      terminated:
+        containerID: docker://a27779a2d4dd0329218e4c50ad721fabf12a7781a40dbd593a0711738f4926fc
+        exitCode: 1
+        finishedAt: "2025-09-21T02:04:26Z"
+        reason: Error
+        startedAt: "2025-09-21T02:04:26Z"
+    name: tempo
+    ready: false
+    resources: {}
+    restartCount: 3
+    started: false
+    state:
+      waiting:
+        message: back-off 40s restarting failed container=tempo pod=tempo-65c4584c9b-p9n5t_shopmicro(ddb1ced7-d5e9-4370-868a-1b887cf48a42)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-bxrxp
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.5
+  hostIPs:
+  - ip: 192.168.105.5
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.36
+  podIPs:
+  - ip: 10.244.0.36
+  qosClass: BestEffort
+  startTime: "2025-09-21T02:03:16Z"

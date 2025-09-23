@@ -1,0 +1,184 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-09-21T03:00:37+01:00"
+  creationTimestamp: "2025-09-21T02:00:38Z"
+  generateName: ml-service-7d8b86dcb-
+  generation: 1
+  labels:
+    app: ml-service
+    pod-template-hash: 7d8b86dcb
+    tier: application
+  name: ml-service-7d8b86dcb-xm77s
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: ml-service-7d8b86dcb
+    uid: 08445531-7845-4d28-a68c-3625e33c6358
+  resourceVersion: "9088"
+  uid: c3128a71-c200-4b5f-bfa1-4a5e97e3f8df
+spec:
+  containers:
+  - env:
+    - name: PORT
+      value: "3002"
+    - name: REDIS_URL
+      value: redis://redis:6379
+    image: shopmicro-ml-service:latest
+    imagePullPolicy: Never
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health/live
+        port: 3002
+        scheme: HTTP
+      initialDelaySeconds: 20
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: ml-service
+    ports:
+    - containerPort: 3002
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health/ready
+        port: 3002
+        scheme: HTTP
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: 400m
+        memory: 512Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-98z96
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-98z96
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:00:39Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:00:38Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:00:38Z"
+    message: 'containers with unready status: [ml-service]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:00:38Z"
+    message: 'containers with unready status: [ml-service]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T02:00:38Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - allocatedResources:
+      cpu: 200m
+      memory: 256Mi
+    containerID: docker://3b7acb64a331cc3e9cb699ee8e80253b4633e60f46c810bffaeb31291a369728
+    image: shopmicro-ml-service:latest
+    imageID: docker://sha256:138386d23c77834cca28efd9d2d3e472d912cfd3fdd6b8fe94c286b714344ce8
+    lastState:
+      terminated:
+        containerID: docker://3b7acb64a331cc3e9cb699ee8e80253b4633e60f46c810bffaeb31291a369728
+        exitCode: 3
+        finishedAt: "2025-09-21T02:04:01Z"
+        reason: Error
+        startedAt: "2025-09-21T02:03:56Z"
+    name: ml-service
+    ready: false
+    resources:
+      limits:
+        cpu: 400m
+        memory: 512Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+    restartCount: 5
+    started: false
+    state:
+      waiting:
+        message: back-off 2m40s restarting failed container=ml-service pod=ml-service-7d8b86dcb-xm77s_shopmicro(c3128a71-c200-4b5f-bfa1-4a5e97e3f8df)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-98z96
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.5
+  hostIPs:
+  - ip: 192.168.105.5
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.33
+  podIPs:
+  - ip: 10.244.0.33
+  qosClass: Burstable
+  startTime: "2025-09-21T02:00:38Z"

@@ -1,0 +1,156 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-09-20T22:37:31Z"
+  generateName: loki-5d579b4dd6-
+  generation: 1
+  labels:
+    app: loki
+    pod-template-hash: 5d579b4dd6
+  name: loki-5d579b4dd6-6wnpc
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: loki-5d579b4dd6
+    uid: 5fe2f16f-8fb9-4757-bd6a-5508489ac511
+  resourceVersion: "3550"
+  uid: 32f7875d-6207-4692-ab46-f25c87c71636
+spec:
+  containers:
+  - args:
+    - -config.file=/etc/loki/loki.yaml
+    image: grafana/loki:latest
+    imagePullPolicy: Always
+    name: loki
+    ports:
+    - containerPort: 3100
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/loki
+      name: config
+    - mountPath: /tmp/loki
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-vq99n
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: loki-config
+    name: config
+  - emptyDir: {}
+    name: data
+  - name: kube-api-access-vq99n
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:45Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:31Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:31Z"
+    message: 'containers with unready status: [loki]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:31Z"
+    message: 'containers with unready status: [loki]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-20T22:37:31Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://6c6a1f54bffe07f9a1b009db5fcd236cea93798d099becf197b0ddc2bd70d9b0
+    image: grafana/loki:latest
+    imageID: docker-pullable://grafana/loki@sha256:31628519045e7f28692a7ae73b4a3fd293dccb425585ed5d16ceea3b5c9592e6
+    lastState:
+      terminated:
+        containerID: docker://6c6a1f54bffe07f9a1b009db5fcd236cea93798d099becf197b0ddc2bd70d9b0
+        exitCode: 1
+        finishedAt: "2025-09-20T23:38:40Z"
+        reason: Error
+        startedAt: "2025-09-20T23:38:40Z"
+    name: loki
+    ready: false
+    resources: {}
+    restartCount: 12
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=loki pod=loki-5d579b4dd6-6wnpc_shopmicro(32f7875d-6207-4692-ab46-f25c87c71636)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /etc/loki
+      name: config
+    - mountPath: /tmp/loki
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-vq99n
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.4
+  hostIPs:
+  - ip: 192.168.105.4
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.9
+  podIPs:
+  - ip: 10.244.0.9
+  qosClass: BestEffort
+  startTime: "2025-09-20T22:37:31Z"

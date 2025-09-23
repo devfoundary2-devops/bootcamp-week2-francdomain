@@ -1,0 +1,159 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-09-21T02:21:37+01:00"
+  creationTimestamp: "2025-09-21T01:07:53Z"
+  generateName: mimir-fd5fdd9c5-
+  generation: 1
+  labels:
+    app: mimir
+    pod-template-hash: fd5fdd9c5
+  name: mimir-fd5fdd9c5-csfdp
+  namespace: shopmicro
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: mimir-fd5fdd9c5
+    uid: f162d459-515d-4313-8ff0-42dc9fe80e6f
+  resourceVersion: "7194"
+  uid: 7b908e08-bbd0-418f-888a-bd9752d0aa68
+spec:
+  containers:
+  - args:
+    - --config.file=/etc/mimir/mimir.yaml
+    - --target=all
+    image: grafana/mimir:latest
+    imagePullPolicy: Always
+    name: mimir
+    ports:
+    - containerPort: 9009
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/mimir
+      name: config
+    - mountPath: /data
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-mdxxb
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: mimir-config
+    name: config
+  - emptyDir: {}
+    name: data
+  - name: kube-api-access-mdxxb
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T01:07:59Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T01:07:53Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T01:07:53Z"
+    message: 'containers with unready status: [mimir]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T01:07:53Z"
+    message: 'containers with unready status: [mimir]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-09-21T01:07:53Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://9f0c3ced75eba994be5b54651f4c425ee4d68e20d24bb46e5be73203df7d619a
+    image: grafana/mimir:latest
+    imageID: docker-pullable://grafana/mimir@sha256:f97a1a6885a0c8ee80bc8f14343183dd67e9786cfbc18198d9a4138354fda55e
+    lastState:
+      terminated:
+        containerID: docker://9f0c3ced75eba994be5b54651f4c425ee4d68e20d24bb46e5be73203df7d619a
+        exitCode: 1
+        finishedAt: "2025-09-21T01:46:34Z"
+        reason: Error
+        startedAt: "2025-09-21T01:46:34Z"
+    name: mimir
+    ready: false
+    resources: {}
+    restartCount: 10
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=mimir pod=mimir-fd5fdd9c5-csfdp_shopmicro(7b908e08-bbd0-418f-888a-bd9752d0aa68)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /etc/mimir
+      name: config
+    - mountPath: /data
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-mdxxb
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.105.5
+  hostIPs:
+  - ip: 192.168.105.5
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.20
+  podIPs:
+  - ip: 10.244.0.20
+  qosClass: BestEffort
+  startTime: "2025-09-21T01:07:53Z"

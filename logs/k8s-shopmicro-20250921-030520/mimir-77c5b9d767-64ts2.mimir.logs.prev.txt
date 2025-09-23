@@ -1,0 +1,1 @@
+error loading config from /etc/mimir/mimir.yaml: Error reading config file: open /etc/mimir/mimir.yaml: no such file or directory

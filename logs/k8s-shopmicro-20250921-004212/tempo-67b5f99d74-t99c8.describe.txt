@@ -1,0 +1,73 @@
+Name:             tempo-67b5f99d74-t99c8
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.4
+Start Time:       Sat, 20 Sep 2025 23:37:31 +0100
+Labels:           app=tempo
+                  pod-template-hash=67b5f99d74
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.12
+IPs:
+  IP:           10.244.0.12
+Controlled By:  ReplicaSet/tempo-67b5f99d74
+Containers:
+  tempo:
+    Container ID:  docker://8e87ae4e1725d5fc8828f1755540ad8636be368c522c8dd72e95aeb337e78448
+    Image:         grafana/tempo:latest
+    Image ID:      docker-pullable://grafana/tempo@sha256:81498b4ab92df2c1bdba63935a0d697b3d2413b5bea84d97c25578abd0259627
+    Ports:         3200/TCP, 4318/TCP
+    Host Ports:    0/TCP, 0/TCP
+    Args:
+      --config.file=/etc/tempo/tempo.yaml
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 00:38:43 +0100
+      Finished:     Sun, 21 Sep 2025 00:38:43 +0100
+    Ready:          False
+    Restart Count:  12
+    Environment:    <none>
+    Mounts:
+      /etc/tempo from config (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-78g68 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      tempo-config
+    Optional:  false
+  kube-api-access-78g68:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  64m                    default-scheduler  Successfully assigned shopmicro/tempo-67b5f99d74-t99c8 to minikube
+  Normal   Pulled     63m                    kubelet            Successfully pulled image "grafana/tempo:latest" in 10.04s (45.918s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     62m                    kubelet            Successfully pulled image "grafana/tempo:latest" in 2.13s (1m6.823s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     62m                    kubelet            Successfully pulled image "grafana/tempo:latest" in 2.282s (2.282s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     62m                    kubelet            Successfully pulled image "grafana/tempo:latest" in 2.425s (2.425s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     61m                    kubelet            Successfully pulled image "grafana/tempo:latest" in 2.128s (2.128s including waiting). Image size: 116659613 bytes.
+  Normal   Created    59m (x6 over 63m)      kubelet            Created container: tempo
+  Normal   Started    59m (x6 over 63m)      kubelet            Started container tempo
+  Normal   Pulled     59m                    kubelet            Successfully pulled image "grafana/tempo:latest" in 2.668s (2.668s including waiting). Image size: 116659613 bytes.
+  Normal   Pulled     56m                    kubelet            Successfully pulled image "grafana/tempo:latest" in 2.535s (2.535s including waiting). Image size: 116659613 bytes.
+  Normal   Pulling    3m33s (x13 over 64m)   kubelet            Pulling image "grafana/tempo:latest"
+  Warning  BackOff    3m29s (x137 over 62m)  kubelet            Back-off restarting failed container tempo in pod tempo-67b5f99d74-t99c8_shopmicro(0af948fe-5e12-4b7e-a242-3efeda6704b5)

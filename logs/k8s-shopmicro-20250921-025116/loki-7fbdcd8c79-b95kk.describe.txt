@@ -1,0 +1,79 @@
+Name:             loki-7fbdcd8c79-b95kk
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.5
+Start Time:       Sun, 21 Sep 2025 02:12:38 +0100
+Labels:           app=loki
+                  pod-template-hash=7fbdcd8c79
+Annotations:      kubectl.kubernetes.io/restartedAt: 2025-09-21T02:26:21+01:00
+Status:           Running
+IP:               10.244.0.27
+IPs:
+  IP:           10.244.0.27
+Controlled By:  ReplicaSet/loki-7fbdcd8c79
+Containers:
+  loki:
+    Container ID:  docker://3b3d343b1aad81fea2f7bc02026eed0abb1776e5c2911760346316520286636a
+    Image:         grafana/loki:latest
+    Image ID:      docker-pullable://grafana/loki@sha256:31628519045e7f28692a7ae73b4a3fd293dccb425585ed5d16ceea3b5c9592e6
+    Port:          3100/TCP
+    Host Port:     0/TCP
+    Args:
+      -config.file=/etc/loki/loki.yaml
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sun, 21 Sep 2025 02:46:44 +0100
+      Finished:     Sun, 21 Sep 2025 02:46:44 +0100
+    Ready:          False
+    Restart Count:  9
+    Environment:    <none>
+    Mounts:
+      /etc/loki from config (rw)
+      /tmp/loki from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6fsx7 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      loki-config
+    Optional:  false
+  data:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  kube-api-access-6fsx7:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                   From               Message
+  ----     ------     ----                  ----               -------
+  Normal   Scheduled  38m                   default-scheduler  Successfully assigned shopmicro/loki-7fbdcd8c79-b95kk to minikube
+  Normal   Pulled     38m                   kubelet            Successfully pulled image "grafana/loki:latest" in 2.161s (2.161s including waiting). Image size: 117304407 bytes.
+  Normal   Pulled     38m                   kubelet            Successfully pulled image "grafana/loki:latest" in 2.053s (2.053s including waiting). Image size: 117304407 bytes.
+  Normal   Pulled     38m                   kubelet            Successfully pulled image "grafana/loki:latest" in 2.391s (2.391s including waiting). Image size: 117304407 bytes.
+  Normal   Pulled     37m                   kubelet            Successfully pulled image "grafana/loki:latest" in 3.355s (3.355s including waiting). Image size: 117304407 bytes.
+  Normal   Pulled     36m                   kubelet            Successfully pulled image "grafana/loki:latest" in 2.721s (2.721s including waiting). Image size: 117304407 bytes.
+  Normal   Created    35m (x6 over 38m)     kubelet            Created container: loki
+  Normal   Started    35m (x6 over 38m)     kubelet            Started container loki
+  Normal   Pulled     35m                   kubelet            Successfully pulled image "grafana/loki:latest" in 2.405s (2.405s including waiting). Image size: 117304407 bytes.
+  Normal   Pulled     32m                   kubelet            Successfully pulled image "grafana/loki:latest" in 2.178s (2.178s including waiting). Image size: 117304407 bytes.
+  Normal   Pulled     9m52s                 kubelet            Successfully pulled image "grafana/loki:latest" in 2.455s (4.966s including waiting). Image size: 117304407 bytes.
+  Normal   Pulling    4m37s (x10 over 38m)  kubelet            Pulling image "grafana/loki:latest"
+  Warning  BackOff    4m33s (x92 over 38m)  kubelet            Back-off restarting failed container loki in pod loki-7fbdcd8c79-b95kk_shopmicro(5016cb74-acca-418a-a8aa-9df4c9c2376e)

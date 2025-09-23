@@ -1,0 +1,2 @@
+error loading config from /etc/mimir/mimir.yaml: Error parsing config file: yaml: unmarshal errors:
+  line 28: field filesystem not found in type mimir.Config

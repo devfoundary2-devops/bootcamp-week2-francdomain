@@ -1,0 +1,70 @@
+Name:             ml-service-7d8b86dcb-xm77s
+Namespace:        shopmicro
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.105.5
+Start Time:       Sun, 21 Sep 2025 03:00:38 +0100
+Labels:           app=ml-service
+                  pod-template-hash=7d8b86dcb
+                  tier=application
+Annotations:      kubectl.kubernetes.io/restartedAt: 2025-09-21T03:00:37+01:00
+Status:           Running
+IP:               10.244.0.33
+IPs:
+  IP:           10.244.0.33
+Controlled By:  ReplicaSet/ml-service-7d8b86dcb
+Containers:
+  ml-service:
+    Container ID:   docker://3b7acb64a331cc3e9cb699ee8e80253b4633e60f46c810bffaeb31291a369728
+    Image:          shopmicro-ml-service:latest
+    Image ID:       docker://sha256:138386d23c77834cca28efd9d2d3e472d912cfd3fdd6b8fe94c286b714344ce8
+    Port:           3002/TCP (http)
+    Host Port:      0/TCP (http)
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    3
+      Started:      Sun, 21 Sep 2025 03:03:56 +0100
+      Finished:     Sun, 21 Sep 2025 03:04:01 +0100
+    Ready:          False
+    Restart Count:  5
+    Limits:
+      cpu:     400m
+      memory:  512Mi
+    Requests:
+      cpu:      200m
+      memory:   256Mi
+    Liveness:   http-get http://:3002/health/live delay=20s timeout=1s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:3002/health/ready delay=5s timeout=1s period=5s #success=1 #failure=3
+    Environment:
+      PORT:       3002
+      REDIS_URL:  redis://redis:6379
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-98z96 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-98z96:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  4m42s                default-scheduler  Successfully assigned shopmicro/ml-service-7d8b86dcb-xm77s to minikube
+  Normal   Pulled     84s (x6 over 4m42s)  kubelet            Container image "shopmicro-ml-service:latest" already present on machine
+  Normal   Created    84s (x6 over 4m42s)  kubelet            Created container: ml-service
+  Normal   Started    84s (x6 over 4m42s)  kubelet            Started container ml-service
+  Warning  BackOff    1s (x22 over 4m32s)  kubelet            Back-off restarting failed container ml-service in pod ml-service-7d8b86dcb-xm77s_shopmicro(c3128a71-c200-4b5f-bfa1-4a5e97e3f8df)
